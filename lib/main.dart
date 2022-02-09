@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:mapa_inf/data/card.dart';
+import 'package:mapa_inf/data/data_place.dart';
 import 'package:provider/provider.dart';
 
 import '../screen/screens.dart';
 
 void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => Cards(),
-      child: const MyApp(),
-    ),
-  );
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (ctx) => Places()),
+      ChangeNotifierProvider(create: (ctx) => Items()),
+    ],
+    child: const MyApp(),
+  )
+      // ChangeNotifierProvider(
+      //   create: (context) => Places(),
+      //   child: const MyApp(),
+      // ),
+      );
 }
 
 class MyApp extends StatelessWidget {
@@ -26,7 +33,7 @@ class MyApp extends StatelessWidget {
       home: const MainScreen(),
       routes: {
         DetailScreen.routeName: (ctx) => const DetailScreen(),
-        DataScreen.routeName: (ctx) => DataScreen(),
+        DataScreen.routeName: (ctx) => const DataScreen(),
       },
     );
   }
